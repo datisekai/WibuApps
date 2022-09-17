@@ -1,14 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { FlatList, ScrollView, StyleSheet } from "react-native";
-import HomeAPI from "../components/actions/Home";
-import CardBanner from "../components/Card/CardBanner";
+import { ScrollView, StyleSheet } from "react-native";
+import HomeAPI from "../actions/Home";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import Section1 from "../components/sections/Section1";
 import Section2 from "../components/sections/Section2";
-import { Text, View } from "../components/Themed";
-import { ComicModel } from "../models/ComicModel";
 import { RootTabScreenProps } from "../types";
 
 export default function TabOneScreen({
@@ -18,7 +13,7 @@ export default function TabOneScreen({
   const { data: dataHome } = useQuery(["home"], () => HomeAPI.home(1));
 
   return (
-    <ScrollView>
+    <ScrollView style={{ marginHorizontal: 8 }}>
       {dataBanner && <Section1 label='Truyện đề cử' data={dataBanner} />}
       {dataHome && <Section2 label='Truyện mới cập nhật' data={dataHome} />}
     </ScrollView>

@@ -13,6 +13,9 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
+import HomeLeft from "../components/Headers/HomeLeft";
+import HomeRight from "../components/Headers/HomeRight";
+import { Text } from "../components/Themed";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -88,31 +91,21 @@ function BottomTabNavigator() {
         name='TabOne'
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Home",
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name='info-circle'
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          title: "Trang chủ",
+          tabBarIcon: ({ color }) => <TabBarIcon name='home' color={color} />,
+          headerRight: () => <HomeRight navigation={navigation} />,
+          headerLeft: () => <HomeLeft navigation={navigation} />,
+          headerTitleAlign: "center",
         })}
       />
       <BottomTab.Screen
         name='TabTwo'
         component={TabTwoScreen}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+          title: "Lịch sử",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name='clock-o' color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -126,5 +119,5 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={25} style={{ marginBottom: -3 }} {...props} />;
 }

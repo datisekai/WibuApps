@@ -1,5 +1,5 @@
-import { BannerModel, ComicModel } from "../../models/ComicModel";
 import axiosClient from "../axios/axiosClient";
+import { BannerModel, ComicModel } from "../models/ComicModel";
 
 interface HomeStructure {
   banner: () => Promise<BannerModel[]>;

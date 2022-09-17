@@ -4,6 +4,7 @@ import { ComicModel } from "../../models/ComicModel";
 import Colors from "../../constants/Colors";
 import CardHome from "../Card/CardHome";
 import { HStack } from "@react-native-material/core";
+import useColorScheme from "../../hooks/useColorScheme";
 
 interface Section2Props {
   data: ComicModel[];
@@ -11,9 +12,14 @@ interface Section2Props {
 }
 
 const Section2: FC<Section2Props> = ({ data, label }) => {
+  const colorScheme = useColorScheme();
   return (
     <View style={styles.container}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && (
+        <Text style={{ ...styles.label, color: Colors[colorScheme].text }}>
+          {label}
+        </Text>
+      )}
 
       <ScrollView contentContainerStyle={styles.list}>
         {data.map((item: ComicModel) => (
@@ -30,7 +36,6 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
     fontSize: 18,
-    color: Colors.dark.text,
     marginBottom: 8,
   },
   container: {
